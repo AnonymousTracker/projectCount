@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="208c70ca-e1a2-4857-aab2-c28486197647" name="Changes" comment="Changes" />
+    <list default="true" id="208c70ca-e1a2-4857-aab2-c28486197647" name="Changes" comment="Changes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,7 +99,7 @@
       <method v="2" />
     </configuration>
     <configuration name="projectCount" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="项目台账整理" />
+      <module name="100_项目台账整理" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -116,7 +119,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="readDocument" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="readDocument" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="项目台账整理" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -181,10 +184,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test2" />
         <item itemvalue="Python.projectCount" />
+        <item itemvalue="Python.test2" />
         <item itemvalue="Python.test3" />
-        <item itemvalue="Python.readDocument" />
         <item itemvalue="Python.buildGUI" />
       </list>
     </recent_temporary>
@@ -200,9 +202,25 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="7f8258a3-f9bc-4d87-bef1-208d0d81e3c0">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />

@@ -1,7 +1,6 @@
 import pandas as pd
 
-dict_path = 'F:\\Python\\100_项目台账整理'  # 文件夹地址
-# 项目台账文件名、sheet页名
+dict_path = 'F:\\Python\\100_项目台账整理\\TestData'  # 文件夹地址
 proj_cur = '\\工作情况汇总.xlsx'  # 读取本期文件
 proj_old = '\\工作情况汇总-上期.xlsx'  # 读取上期文件
 proj_sheet = '项目台账2'  # 读取sheet页名

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="7dd44dc4-6c51-4370-b928-c726893a0915" name="变更" comment="Changes">
+    <list default="true" id="7dd44dc4-6c51-4370-b928-c726893a0915" name="变更" comment="添加执行中项目统计">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestData/工作情况汇总.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/TestData/工作情况汇总.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectCount.py" beforeDir="false" afterPath="$PROJECT_DIR$/projectCount.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,10 +36,12 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "F:/Python/Version Control",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "vcs.Git"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.projectCount">
+  <component name="RunManager" selected="Python.test2">
     <configuration name="projectCount" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="100_项目台账整理" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -83,8 +86,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.projectCount" />
         <item itemvalue="Python.test2" />
+        <item itemvalue="Python.projectCount" />
       </list>
     </recent_temporary>
   </component>
@@ -118,7 +121,14 @@
       <option name="presentableId" value="Default" />
       <updated>1652513677558</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="添加执行中项目统计">
+      <created>1652537816464</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1652537816464</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -134,6 +144,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes" />
+    <MESSAGE value="添加执行中项目统计" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加执行中项目统计" />
   </component>
 </project>

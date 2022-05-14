@@ -196,7 +196,7 @@ def getStatus(a, statustemp):
             x = a[i]
             status.append(statustemp[x])
 
-    if set(status) <= set(endMark):     # 运算符<=表示status是endMark的子集
+    if set(status) <= set(endMark):  # 运算符<=表示status是endMark的子集
         status_proj = '已结束'
     elif set(exeMark) <= set(status):
         status_proj = '执行中'
@@ -387,15 +387,15 @@ def projCount(proj_cur, proj_num, area_num, proj_fun):
         4.其他情形，跳过遍历
         '''
         if i != projIndex[0] and i in projIndex:
-            continue    # 1.项目已被统计，跳过遍历
-        elif projNameCunt == 1 and statusProj != '已结束':     # 2.项目仅一个任务，且非'已结束'
+            continue  # 1.项目已被统计，跳过遍历
+        elif projNameCunt == 1 and statusProj != '已结束':  # 2.项目仅一个任务，且非'已结束'
             proj_num = projNumCount(proj_cur, i, proj_num)
             [area_num, proj_fun] = judBusinArea(i, project_name, function_point, area_num, proj_fun,
                                                 system_name, areaDetail)
-        elif projNameCunt > 1 and statusProj != '已结束':     # 3.项目多个任务，且非'已结束'
+        elif projNameCunt > 1 and statusProj != '已结束':  # 3.项目多个任务，且非'已结束'
             projectRoleTemp = [project_role[a] for a in projIndex]
             functionPointTemp = [function_point[a] for a in projIndex]
-            if '主办' in projectRoleTemp:     # 3.1 存在主办，则项目计入主办所在职能组、业务领域
+            if '主办' in projectRoleTemp:  # 3.1 存在主办，则项目计入主办所在职能组、业务领域
                 jTemp = projectRoleTemp.index('主办')
                 if type(jTemp) is not int:
                     j = projIndex[jTemp[0]]
@@ -404,19 +404,19 @@ def projCount(proj_cur, proj_num, area_num, proj_fun):
                 proj_num = projNumCount(proj_cur, j, proj_num)
                 [area_num, proj_fun] = judBusinArea(j, project_name, function_point, area_num, proj_fun,
                                                     system_name, areaDetail)
-            elif sum(functionPointTemp) != 0:     # 3.1 不存在主办，任务功能点数均不为0，获得功能点数最大协办索引，项目归属于最大功能点对应职能组、业务领域
+            elif sum(functionPointTemp) != 0:  # 3.1 不存在主办，任务功能点数均不为0，获得功能点数最大协办索引，项目归属于最大功能点对应职能组、业务领域
                 jTemp = functionPointTemp.index(max(functionPointTemp))
                 j = projIndex[jTemp]
                 proj_num = projNumCount(proj_cur, j, proj_num)
                 [area_num, proj_fun] = judBusinArea(j, project_name, function_point, area_num, proj_fun,
                                                     system_name, areaDetail)
-            else:     # 3.2 不存在主办，且功能点数为0，项目归属于第一个任务对应职能组、业务领域
+            else:  # 3.2 不存在主办，且功能点数为0，项目归属于第一个任务对应职能组、业务领域
                 j = projIndex[0]
                 proj_num = projNumCount(proj_cur, j, proj_num)
                 [area_num, proj_fun] = judBusinArea(j, project_name, function_point, area_num, proj_fun,
                                                     system_name, areaDetail)
         else:
-            continue    # 4.其他情形，跳过遍历
+            continue  # 4.其他情形，跳过遍历
     return proj_num, area_num, proj_fun
 
 
@@ -444,11 +444,11 @@ print('目前正在推进项目 %d 个。其中：\n'
       % (projNum, projMainNum, projAssistNum, firstGroup, firstGroupMain, firstGroupAssist, firstGroupExe,
          secondGroup, secondGroupMain, secondGroupAssist, secondGroupExe))
 
-
 print('项目数量按业务领域分布：\n'
       '监管  反洗钱  理财子公司 资产负债  BoEing下移\n'
       ' %d      %d       %d       %d       %d\n' % (superviProjNum, antimonlaunProjNum, finmanProjNum, assliabProjNum,
                                                     boeingProjNum))
+
 
 # 不同领域任务统计数
 def taskCount(proj_cur, area_detail, task_num, task_fun):

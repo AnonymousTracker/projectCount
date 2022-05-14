@@ -51,7 +51,7 @@ def cleanData(sheet_proj, key_fir, key_sec):
                 if label_t == key_fir:
                     # [a, x]分别为'项目名称'所在行、列索引
                     sheet_proj.columns = sheet_proj.loc[a].tolist()  # 重新创建列索引，仅在'项目名称'非列索引情况下需要进行
-                    sheet_proj = sheet_proj.drop(x, axis=0)  # 删除'项目名称'行列
+                    sheet_proj = sheet_proj.drop(a, axis=0)  # 删除'项目名称'行列
                     flag = False
                     break
             if not flag:
@@ -185,6 +185,7 @@ def newDataFrame(proj_from):
 # 判断单个项目/任务状态
 def getStatus(a, statustemp):
     endMark = ['已结束', '末次准出', '无实际工作']
+    exeMark = ['执行中']
     # 如果任务仅包含endMark中状态，则项目已结束，否则在研
     status = []
     # a = [17, 18, 19]
@@ -197,8 +198,10 @@ def getStatus(a, statustemp):
 
     if set(status) <= set(endMark):     # 运算符<=表示status是endMark的子集
         status_proj = '已结束'
+    elif set(exeMark) <= set(status):
+        status_proj = '执行中'
     else:
-        status_proj = '在研'
+        status_proj = '未开始'
     return status_proj
 
 
@@ -301,24 +304,28 @@ def getDualProjIndexIndex(L, f):
 def projNumCount(proj_cur, a, proj_num_list):
     [project_name, charge_group, system_name, charge_man, status, amount_work, function_point,
      project_role] = newDataFrame(proj_cur)
-    [proj_num, first_group, first_group_main, first_group_assist, sec_group, sec_group_main,
-     sec_group_assist] = proj_num_list
+    [proj_num, first_group, first_group_main, first_group_assist, first_group_exe, sec_group, sec_group_main,
+     sec_group_assist, sec_group_exe] = proj_num_list
     # 确定项目领域
-    proj_num = proj_num_list[0] + 1
+    proj_num = proj_num + 1
     if charge_group[a] == '测试一组':
-        first_group = proj_num_list[1] + 1
+        first_group = first_group + 1
+        if status[a] == '执行中':
+            first_group_exe = first_group_exe + 1
         if project_role[a] == '主办':
-            first_group_main = proj_num_list[2] + 1
+            first_group_main = first_group_main + 1
         else:
-            first_group_assist = proj_num_list[3] + 1
+            first_group_assist = first_group_assist + 1
     else:
-        sec_group = proj_num_list[4] + 1
+        sec_group = sec_group + 1
+        if status[a] == '执行中':
+            sec_group_exe = sec_group_exe + 1
         if project_role[a] == '主办':
-            sec_group_main = proj_num_list[5] + 1
+            sec_group_main = sec_group_main + 1
         else:
-            sec_group_assist = proj_num_list[6] + 1
-    proj_num_list = [proj_num, first_group, first_group_main, first_group_assist, sec_group,
-                     sec_group_main, sec_group_assist]
+            sec_group_assist = sec_group_assist + 1
+    proj_num_list = [proj_num, first_group, first_group_main, first_group_assist, first_group_exe, sec_group,
+                     sec_group_main, sec_group_assist, sec_group_exe]
     return proj_num_list
 
 
@@ -344,7 +351,7 @@ def updateProj(proj_old, proj_cur, update_num):
         status_old = getStatus(proj_index_old, old_status)  # 上期项目状态
         if i != proj_index_cur[0] and i in proj_index_cur:
             continue
-        elif cur_name[i] not in old_name and status_cur == '在研':
+        elif cur_name[i] not in old_name and status_cur != '已结束':
             insert_num = insert_num + 1
         elif cur_name[i] not in old_name and status_cur == '已结束':
             out_num = out_num + 1
@@ -368,27 +375,27 @@ def projCount(proj_cur, proj_num, area_num, proj_fun):
     for i in range(0, len(project_name)):
         projIndex = getDualProjIndexIndex(project_name, project_name[i])  # 获得同一项目所有索引
         projNameCunt = len(projIndex)
-        statusProj = getStatus(projIndex, status)  # 获得同一项目多个协办任务的项目状态
-        # 创建项目统计初始列表
-        # 台账中，项目主协办涉及一个系统，则排除'已结束'、'每次准出'项目即可获得在研项目统计数据
+        statusProj = getStatus(projIndex, status)  # 获得项目的项目状态
+        '''
+        1.项目已被统计，跳过遍历
+        2.项目仅一个任务，且非'已结束'
+        3.项目多个任务，且非'已结束'
+        3.1 存在主办，则项目计入主办所在职能组、业务领域
+        3.2 不存在主办
+        3.2.1 不存在主办，任务功能点数均不为0，获得功能点数最大协办索引，项目归属于最大功能点对应职能组、业务领域
+        3.2.2 不存在主办，且功能点数为0，项目归属于第一个任务对应职能组、业务领域
+        4.其他情形，跳过遍历
+        '''
         if i != projIndex[0] and i in projIndex:
-            continue
-        elif projNameCunt == 1 and statusProj == '在研':
-            proj_num = projNumCount(proj_cur, i, proj_num)  # 统计一二组主协办项目数据
+            continue    # 1.项目已被统计，跳过遍历
+        elif projNameCunt == 1 and statusProj != '已结束':     # 2.项目仅一个任务，且非'已结束'
+            proj_num = projNumCount(proj_cur, i, proj_num)
             [area_num, proj_fun] = judBusinArea(i, project_name, function_point, area_num, proj_fun,
-                                                system_name, areaDetail)  # 统计一二组不同领域项目数据
-            '''
-            台账中，项目主协办涉及多个系统，则存在一下几种情况
-            1.同一项目多个协办，存在在研
-            1.1 存在主办，则项目信息列入主办
-            1.2 不存在主办
-            1.2.1 不存在主办，协办功能点数不为0，获得功能点数最大协办索引，项目归属于最大功能点对应职能组、领域
-            1.2.2 不存在主办，且功能点数为0
-            '''
-        elif projNameCunt > 1 and statusProj == '在研':   # 1.同一项目多个协办且处于在研状态
+                                                system_name, areaDetail)
+        elif projNameCunt > 1 and statusProj != '已结束':     # 3.项目多个任务，且非'已结束'
             projectRoleTemp = [project_role[a] for a in projIndex]
             functionPointTemp = [function_point[a] for a in projIndex]
-            if '主办' in projectRoleTemp:     # 1.1 存在主办，则项目信息列入主办
+            if '主办' in projectRoleTemp:     # 3.1 存在主办，则项目计入主办所在职能组、业务领域
                 jTemp = projectRoleTemp.index('主办')
                 if type(jTemp) is not int:
                     j = projIndex[jTemp[0]]
@@ -397,34 +404,29 @@ def projCount(proj_cur, proj_num, area_num, proj_fun):
                 proj_num = projNumCount(proj_cur, j, proj_num)
                 [area_num, proj_fun] = judBusinArea(j, project_name, function_point, area_num, proj_fun,
                                                     system_name, areaDetail)
-            else:
-
-
-
-
-                    sum(functionPointTemp) != 0:
-                jTemp = functionPointTemp.index(max(functionPointTemp))     # 不存在主办，协办功能点数不为0，项目归属于最大功能点对应职能组、领域
+            elif sum(functionPointTemp) != 0:     # 3.1 不存在主办，任务功能点数均不为0，获得功能点数最大协办索引，项目归属于最大功能点对应职能组、业务领域
+                jTemp = functionPointTemp.index(max(functionPointTemp))
                 j = projIndex[jTemp]
                 proj_num = projNumCount(proj_cur, j, proj_num)
                 [area_num, proj_fun] = judBusinArea(j, project_name, function_point, area_num, proj_fun,
                                                     system_name, areaDetail)
-            else:   # 不存在主办，且功能点数为0，项目归属于项目第一个系统对应职能组、领域
+            else:     # 3.2 不存在主办，且功能点数为0，项目归属于第一个任务对应职能组、业务领域
                 j = projIndex[0]
                 proj_num = projNumCount(proj_cur, j, proj_num)
                 [area_num, proj_fun] = judBusinArea(j, project_name, function_point, area_num, proj_fun,
                                                     system_name, areaDetail)
         else:
-            continue    # 项目处于结束状态，则跳过
-        return proj_num, area_num, proj_fun
+            continue    # 4.其他情形，跳过遍历
+    return proj_num, area_num, proj_fun
 
 
 # 不同业务领域项目数、不同业务领域项目数/功能点数
-projNumList = [0, 0, 0, 0, 0, 0, 0]
+projNumList = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 projAreaNum = [0, 0, 0, 0, 0]
 projFunList = [0, 0, 0, 0, 0]
 [projNumList, projAreaNum, projFunList] = projCount(proj_Cur, projNumList, projAreaNum, projFunList)
-[projNum, firstGroup, firstGroupMain, firstGroupAssist, secondGroup, secondGroupMain,
- secondGroupAssist] = projNumList
+[projNum, firstGroup, firstGroupMain, firstGroupAssist, firstGroupExe, secondGroup, secondGroupMain,
+ secondGroupAssist, secondGroupExe] = projNumList
 [superviProjNum, antimonlaunProjNum, finmanProjNum, assliabProjNum, boeingProjNum] = projAreaNum
 projMainNum = firstGroupMain + secondGroupMain
 projAssistNum = firstGroupAssist + secondGroupAssist
@@ -435,12 +437,12 @@ projAssistNum = firstGroupAssist + secondGroupAssist
 '''
 
 # 项目统计报告
-print('目前正在推进项目 %d 个。其中：\n'  # 5
-      '1）主办 %d 个，协办 %d 个；\n'  # 3, 2
-      '2）一组 %d 个。其中主办 %d 个，协办 %d 个.\n'  # 2, 1, 1
-      '3）二组 %d 个。其中主办 %d 个，协办 %d 个.\n'  # 3, 2, 1
-      % (projNum, projMainNum, projAssistNum, firstGroup, firstGroupMain, firstGroupAssist,
-         secondGroup, secondGroupMain, secondGroupAssist))
+print('目前正在推进项目 %d 个。其中：\n'
+      '1）主办 %d 个，协办 %d 个；\n'
+      '2）一组 %d 个。其中主办 %d 个，协办 %d 个, 执行中 %d 个.\n'
+      '3）二组 %d 个。其中主办 %d 个，协办 %d 个, 执行中 %d 个.\n'
+      % (projNum, projMainNum, projAssistNum, firstGroup, firstGroupMain, firstGroupAssist, firstGroupExe,
+         secondGroup, secondGroupMain, secondGroupAssist, secondGroupExe))
 
 
 print('项目数量按业务领域分布：\n'
@@ -462,7 +464,7 @@ def taskCount(proj_cur, area_detail, task_num, task_fun):
         statusTask = getStatus(i, status)
         if pd.isna(project_name[i]):
             continue
-        elif statusTask == '在研':
+        elif statusTask != '已结束':
             [task_num, task_fun] = judBusinArea(i, project_name, function_point, task_num, task_fun, system_name,
                                                 area_detail)
         else:

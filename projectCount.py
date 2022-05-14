@@ -460,7 +460,7 @@ def taskCount(proj_cur, area_detail, task_num, task_fun):
         statusTask = getStatus(i, status)
         if pd.isna(project_name[i]):
             continue
-        elif statusTask == '在研':
+        elif statusTask != '已结束':
             [task_num, task_fun] = judBusinArea(i, project_name, function_point, task_num, task_fun, system_name,
                                                 area_detail)
         else:

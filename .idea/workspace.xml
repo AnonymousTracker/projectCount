@@ -40,7 +40,7 @@
     "settings.editor.selected.configurable": "vcs.Git"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.test2">
+  <component name="RunManager" selected="Python.projectCount">
     <configuration name="projectCount" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="100_项目台账整理" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -85,8 +85,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test2" />
         <item itemvalue="Python.projectCount" />
+        <item itemvalue="Python.test2" />
       </list>
     </recent_temporary>
   </component>

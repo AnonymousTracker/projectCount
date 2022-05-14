@@ -4,9 +4,8 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7dd44dc4-6c51-4370-b928-c726893a0915" name="变更" comment="添加执行中项目统计">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
+    <list default="true" id="7dd44dc4-6c51-4370-b928-c726893a0915" name="变更" comment="代码格式化">
+      <change beforePath="$PROJECT_DIR$/projectCount.py" beforeDir="false" afterPath="$PROJECT_DIR$/projectCount.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652537816464</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="代码格式化">
+      <created>1652539088022</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1652539088022</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -145,6 +151,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changes" />
     <MESSAGE value="添加执行中项目统计" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加执行中项目统计" />
+    <MESSAGE value="代码格式化" />
+    <option name="LAST_COMMIT_MESSAGE" value="代码格式化" />
   </component>
 </project>

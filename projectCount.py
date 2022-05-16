@@ -163,9 +163,20 @@ def changeStatus(proj_cur):
     return proj_cur
 
 
+# 项目主协办为空，置为协办
+def roleStatus(proj_cur):
+    project_role = proj_cur['主协办'].tolist()
+    for i in range(0, len(project_role)):
+        if pd.isna(project_role[i]):
+            project_role[i] = '协助'
+        else:
+            continue
+    return proj_cur
+
 proj_Cur = amouWoTypeChange(proj_Cur)
 proj_Cur = funPoinTypeChange(proj_Cur)
 proj_Cur = changeStatus(proj_Cur)
+proj_Cur = roleStatus(proj_Cur)
 
 
 # 将项目台账数据按列转换为列表
@@ -398,7 +409,7 @@ def projCount(proj_cur, proj_num, area_num, proj_fun):
             if '主办' in projectRoleTemp:  # 3.1 存在主办，则项目计入主办所在职能组、业务领域
                 jTemp = projectRoleTemp.index('主办')
                 if type(jTemp) is not int:
-                    j = projIndex[jTemp[0]]
+                    j = projIndex[jTemp[0]]     #项目存在多个主办，归属于第一主办
                 else:
                     j = projIndex[jTemp]
                 proj_num = projNumCount(proj_cur, j, proj_num)

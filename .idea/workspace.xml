@@ -4,7 +4,8 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7dd44dc4-6c51-4370-b928-c726893a0915" name="变更" comment="代码格式化">
+    <list default="true" id="7dd44dc4-6c51-4370-b928-c726893a0915" name="变更" comment="删除test2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projectCount.py" beforeDir="false" afterPath="$PROJECT_DIR$/projectCount.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,15 +32,15 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "F:/Python/Version Control",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "vcs.Git"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Python/Version Control&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.projectCount">
     <configuration name="projectCount" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="100_项目台账整理" />
@@ -134,7 +135,21 @@
       <option name="project" value="LOCAL" />
       <updated>1652539088022</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="代码格式化">
+      <created>1652539103058</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1652539103058</updated>
+    </task>
+    <task id="LOCAL-00007" summary="删除test2">
+      <created>1652539400366</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1652539400366</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -152,6 +167,7 @@
     <MESSAGE value="Changes" />
     <MESSAGE value="添加执行中项目统计" />
     <MESSAGE value="代码格式化" />
-    <option name="LAST_COMMIT_MESSAGE" value="代码格式化" />
+    <MESSAGE value="删除test2" />
+    <option name="LAST_COMMIT_MESSAGE" value="删除test2" />
   </component>
 </project>
